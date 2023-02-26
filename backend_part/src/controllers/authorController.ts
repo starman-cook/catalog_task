@@ -14,6 +14,7 @@ export class AuthorController {
         this.router.get('/', this.getAuthors)
         this.router.post('/', this.createAuthor)
         this.router.delete('/:id', this.deleteAuthor)
+        this.router.get('/:id', this.getAuthor)
     }
     public getRouter = (): Router => {
         return this.router
@@ -61,6 +62,24 @@ export class AuthorController {
             const response: IResponse = {
                 result: num,
                 message: num ? 'Author is deleted' : 'Nothing was deleted'
+            }
+            res.send(response)
+        } catch(err: unknown) {
+            const error = err as Error
+            const response: IResponse = {
+                result: [],
+                message: error.message
+            }
+            res.send(response)
+        }
+    }
+
+    private getAuthor = async(req: Request, res: Response): Promise<void> => {
+        try {
+            const author = await this.service.getAuthor(parseInt(req.params.id))
+            const response: IResponse = {
+                result: author,
+                message: author ? 'Author found' : 'Nothing found'
             }
             res.send(response)
         } catch(err: unknown) {

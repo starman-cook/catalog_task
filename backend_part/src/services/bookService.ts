@@ -36,4 +36,10 @@ export class BookService {
             id
         }})
     }
+
+    public getBook = async (id: number): Promise<Book | null> => {
+        return Book.findOne({where: {
+            id
+        }, include: [Author]})
+    }
 }

@@ -14,6 +14,7 @@ export class BookController {
         this.router.post('/', this.createBook)
         this.router.post('/add-author', this.addAuthor)
         this.router.delete('/:id', this.deleteBook)
+        this.router.get('/:id', this.getBook)
     }
     public getRouter = (): Router => {
         return this.router
@@ -92,5 +93,23 @@ export class BookController {
         }
     }
 
+
+    private getBook = async(req: Request, res: Response): Promise<void> => {
+        try {
+            const book = await this.service.getBook(parseInt(req.params.id))
+            const response: IResponse = {
+                result: book,
+                message: book ? 'Book found' : 'Nothing found'
+            }
+            res.send(response)
+        } catch(err: unknown) {
+            const error = err as Error
+            const response: IResponse = {
+                result: [],
+                message: error.message
+            }
+            res.send(response)
+        }
+    }
 
 }

@@ -18,4 +18,10 @@ export class AuthorService {
             id
         }})
     }
+
+    public getAuthor = async (id: number): Promise<Author | null> => {
+        return Author.findOne({where: {
+            id
+        }, include: [Book]})
+    }
 }
