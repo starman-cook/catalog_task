@@ -30,4 +30,10 @@ export class BookService {
     public addAuthor = async (bookId: number, authorId: number): Promise<BookAuthor> => {
         return await BookAuthor.create({bookId, authorId})
     }
+
+    public deleteBook = async (id: number): Promise<number> => {
+        return await Book.destroy({where: {
+            id
+        }})
+    }
 }
