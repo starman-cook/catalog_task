@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import { DB } from './repository/postgres'
 import cors from 'cors'
 import { AuthorController } from './controllers/authorController'
+import { BookController } from './controllers/bookController'
 dotenv.config()
 
 export class App {
@@ -26,6 +27,7 @@ export class App {
     public init = async () => {
         try {
             this.app.use('/authors', new AuthorController().getRouter())
+            this.app.use('/books', new BookController().getRouter())
             this.listen(parseInt(process.env.APP_PORT || '') || 8000)
             await new DB().init()
         } catch (err: unknown) {

@@ -1,13 +1,14 @@
-import IAuthorDto from "../interfaces/IAuthorDTO"
+
+import IAuthorDto from "../interfaces/IAuthorDto"
 import { Author } from "../models/Author"
 
 
 export class AuthorService {
-    public getAuthors = async () => {
-        return Author.findAll()
+    public getAuthors = async (): Promise<Author[]> => {
+        return await Author.findAll()
     }
 
-    public createAuthor = async (author: IAuthorDto) => {
-        return Author.create({...author})
+    public createAuthor = async (author: IAuthorDto): Promise<Author> => {
+        return await Author.create({...author})
     }
 }
