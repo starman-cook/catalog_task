@@ -14,6 +14,7 @@ export class AuthorController {
         this.router.get('/', this.getAuthors)
         this.router.post('/', this.createAuthor)
         this.router.delete('/:id', this.deleteAuthor)
+        this.router.delete('/with-books/:id', this.deleteAuthorWithBooks)
         this.router.get('/:id', this.getAuthor)
         this.router.get('/min/:min', this.getAuthorsByMin)
         this.router.get('/max/:max', this.getAuthorsByMax)
@@ -119,6 +120,24 @@ export class AuthorController {
             const response: IResponse = {
                 result: num,
                 message: num ? 'Author is deleted' : 'Nothing was deleted'
+            }
+            res.send(response)
+        } catch(err: unknown) {
+            const error = err as Error
+            const response: IResponse = {
+                result: [],
+                message: error.message
+            }
+            res.send(response)
+        }
+    }
+
+    private deleteAuthorWithBooks = async(req: Request, res: Response): Promise<void> => {
+        try {
+            const num: number = await this.service.deleteAuthorWithBooks(parseInt(req.params.id))
+            const response: IResponse = {
+                result: num,
+                message: num ? 'Author is deleted with books' : 'Nothing was deleted'
             }
             res.send(response)
         } catch(err: unknown) {

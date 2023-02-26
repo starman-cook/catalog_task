@@ -4,6 +4,7 @@ import { Author } from "../models/Author"
 import { Book } from "../models/Book"
 import { Sequelize } from 'sequelize-typescript';
 import { db } from "../repository/postgres";
+import { BookAuthor } from "../models/BookAuthor";
 
 export class AuthorService {
     private sequelize: Sequelize
@@ -58,6 +59,18 @@ export class AuthorService {
         return await Author.destroy({where: {
             id
         }})
+    }
+
+    public deleteAuthorWithBooks = async (id: number): Promise<number> => {
+        const amount: number = await BookAuthor.destroy({
+            where: {
+                authorId: id
+            }
+        })
+        await Author.destroy({where: {
+            id
+        }})
+        return amount
     }
 
     public getAuthor = async (id: number): Promise<Author | null> => {
