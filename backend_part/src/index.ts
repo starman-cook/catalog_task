@@ -1,5 +1,6 @@
 import express, {Express, Request, Response} from 'express'
 import dotenv from "dotenv"
+import { DB } from './repository/postgres'
 dotenv.config()
 
 export class App {
@@ -18,9 +19,10 @@ export class App {
         })
     } 
 
-    public init = () => {
+    public init = async () => {
         try {
             this.listen(parseInt(process.env.APP_PORT || '') || 8000)
+            await new DB().init()
         } catch (err: unknown) {
             console.log(err)
         }
