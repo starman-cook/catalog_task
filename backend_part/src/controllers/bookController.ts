@@ -24,7 +24,7 @@ export class BookController {
 
     private getBooks = async(req: Request, res: Response): Promise<void> => {
         try {
-            const books: IBook[] = await this.service.getBooks(req.body.title)
+            const books: IBook[] = await this.service.getBooks(req.query.title?.toString())
             const response: IResponse = {
                 result: books,
                 message: 'Results found'

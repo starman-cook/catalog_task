@@ -5,7 +5,12 @@ import {Op} from 'sequelize'
 import { Author } from "../models/Author"
 
 export class BookService {
-    public getBooks = async (title: string): Promise<Book[]> => {
+    public getBooks = async (title?: string): Promise<Book[]> => {
+        if (!title) {
+            return await Book.findAll({
+                include: [Author] || []
+            })
+        }
         return await Book.findAll({
             where: {
                 title: {
