@@ -18,7 +18,10 @@ export class DB {
             models: [path.join(__dirname, '../models')], 
           });
     }
-
+    public getSequelize = () => {
+        return this.sequelize
+    }
+    
     public init = async(): Promise<void> => {
             try {
                 await this.sequelize.authenticate()
@@ -35,3 +38,5 @@ export class DB {
         await this.sequelize.close()
     }
 }
+
+export const db = new DB()

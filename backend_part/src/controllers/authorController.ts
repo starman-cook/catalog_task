@@ -15,14 +15,71 @@ export class AuthorController {
         this.router.post('/', this.createAuthor)
         this.router.delete('/:id', this.deleteAuthor)
         this.router.get('/:id', this.getAuthor)
+        this.router.get('/min/:min', this.getAuthorsByMin)
+        this.router.get('/max/:max', this.getAuthorsByMax)
+        this.router.get('/min-max/:min/:max', this.getAuthorsByMinMax)
     }
     public getRouter = (): Router => {
         return this.router
     }
 
+    private getAuthorsByMinMax = async(req: Request, res: Response): Promise<void> => {
+        try {
+            const authors: IAuthor[] = await this.service.getAuthorsByMinMax(parseInt(req.params.min), parseInt(req.params.max))
+            const response: IResponse = {
+                result: authors,
+                message: 'Results found'
+            }
+            res.send(response)
+        } catch(err: unknown) {
+            const error = err as Error
+            const response: IResponse = {
+                result: [],
+                message: error.message
+            }
+            res.send(response)
+        }
+    }
+
+    private getAuthorsByMax = async(req: Request, res: Response): Promise<void> => {
+        try {
+            const authors: IAuthor[] = await this.service.getAuthorsByMax(parseInt(req.params.max))
+            const response: IResponse = {
+                result: authors,
+                message: 'Results found'
+            }
+            res.send(response)
+        } catch(err: unknown) {
+            const error = err as Error
+            const response: IResponse = {
+                result: [],
+                message: error.message
+            }
+            res.send(response)
+        }
+    }
+
+    private getAuthorsByMin = async(req: Request, res: Response): Promise<void> => {
+        try {
+            const authors: IAuthor[] = await this.service.getAuthorsByMin(parseInt(req.params.min))
+            const response: IResponse = {
+                result: authors,
+                message: 'Results found'
+            }
+            res.send(response)
+        } catch(err: unknown) {
+            const error = err as Error
+            const response: IResponse = {
+                result: [],
+                message: error.message
+            }
+            res.send(response)
+        }
+    }
+
     private getAuthors = async(req: Request, res: Response): Promise<void> => {
         try {
-            const authors = await this.service.getAuthors()
+            const authors: IAuthor[] = await this.service.getAuthors()
             const response: IResponse = {
                 result: authors,
                 message: 'Results found'
@@ -40,7 +97,7 @@ export class AuthorController {
 
     private createAuthor = async(req: Request, res: Response): Promise<void> => {
         try {
-            const author = await this.service.createAuthor(req.body)
+            const author: IAuthor = await this.service.createAuthor(req.body)
             const response: IResponse = {
                 result: author,
                 message: 'Author is created'
@@ -58,7 +115,7 @@ export class AuthorController {
 
     private deleteAuthor = async(req: Request, res: Response): Promise<void> => {
         try {
-            const num = await this.service.deleteAuthor(parseInt(req.params.id))
+            const num: number = await this.service.deleteAuthor(parseInt(req.params.id))
             const response: IResponse = {
                 result: num,
                 message: num ? 'Author is deleted' : 'Nothing was deleted'
@@ -76,7 +133,7 @@ export class AuthorController {
 
     private getAuthor = async(req: Request, res: Response): Promise<void> => {
         try {
-            const author = await this.service.getAuthor(parseInt(req.params.id))
+            const author: IAuthor | null = await this.service.getAuthor(parseInt(req.params.id))
             const response: IResponse = {
                 result: author,
                 message: author ? 'Author found' : 'Nothing found'

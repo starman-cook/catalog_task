@@ -12,13 +12,16 @@ export class BookService {
                     [Op.like]: title
                 }
             },
-            include: [Author]
+            include: [Author] || []
         })
     }
 
     public createBook = async (book: IBookDto): Promise<Book> => {
         const newBook = await Book.create({...book})
         book.authorIds.forEach(async (authorId) => {
+            console.log('bookId', newBook.id)
+            console.log('authorId', authorId)
+
             await BookAuthor.create({
                 bookId: newBook.id,
                 authorId
@@ -40,6 +43,6 @@ export class BookService {
     public getBook = async (id: number): Promise<Book | null> => {
         return Book.findOne({where: {
             id
-        }, include: [Author]})
+        }, include: [Author] || []})
     }
 }

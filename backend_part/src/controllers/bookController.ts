@@ -1,4 +1,6 @@
 import express, { Router, Request, Response } from "express";
+import IBook from "../interfaces/IBook";
+import IBookAuthor from "../interfaces/IBookAuthor";
 import IResponse from "../interfaces/IResponse";
 import { BookService } from "../services/bookService";
 
@@ -22,7 +24,7 @@ export class BookController {
 
     private getBooks = async(req: Request, res: Response): Promise<void> => {
         try {
-            const books = await this.service.getBooks(req.body.title)
+            const books: IBook[] = await this.service.getBooks(req.body.title)
             const response: IResponse = {
                 result: books,
                 message: 'Results found'
@@ -40,7 +42,7 @@ export class BookController {
 
     private createBook = async(req: Request, res: Response): Promise<void> => {
         try {
-            const book = await this.service.createBook(req.body)
+            const book: IBook = await this.service.createBook(req.body)
             const response: IResponse = {
                 result: book,
                 message: 'Book is created'
@@ -59,7 +61,7 @@ export class BookController {
     private addAuthor = async(req: Request, res: Response): Promise<void> => {
         try {
             const {bookId, authorId} = req.body
-            const bookAuthor = await this.service.addAuthor(bookId, authorId)
+            const bookAuthor: IBookAuthor = await this.service.addAuthor(bookId, authorId)
             const response: IResponse = {
                 result: bookAuthor,
                 message: 'Author is added'
@@ -77,7 +79,7 @@ export class BookController {
 
     private deleteBook = async(req: Request, res: Response): Promise<void> => {
         try {
-            const num = await this.service.deleteBook(parseInt(req.params.id))
+            const num: number = await this.service.deleteBook(parseInt(req.params.id))
             const response: IResponse = {
                 result: num,
                 message: num ? 'Book is deleted' : 'Nothing was deleted'
@@ -96,7 +98,7 @@ export class BookController {
 
     private getBook = async(req: Request, res: Response): Promise<void> => {
         try {
-            const book = await this.service.getBook(parseInt(req.params.id))
+            const book: IBook | null = await this.service.getBook(parseInt(req.params.id))
             const response: IResponse = {
                 result: book,
                 message: book ? 'Book found' : 'Nothing found'
