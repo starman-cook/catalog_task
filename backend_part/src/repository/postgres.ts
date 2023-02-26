@@ -19,7 +19,7 @@ export class DB {
           });
     }
 
-    public init = async() => {
+    public init = async(): Promise<void> => {
             try {
                 await this.sequelize.authenticate()
                 await this.sequelize.sync({
@@ -29,5 +29,9 @@ export class DB {
             } catch (err) {
                 console.log(err)
             }
+    }
+
+    public close = async(): Promise<void> => {
+        await this.sequelize.close()
     }
 }

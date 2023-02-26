@@ -15,11 +15,11 @@ export class Author extends Model {
         type: DataType.STRING,
         allowNull: false
     })
-    firstname!: string
+    firstName!: string
 
     @Column({
         type: DataType.STRING,
         allowNull: false
     })
-    lastname!: string
+    lastName!: string
 }

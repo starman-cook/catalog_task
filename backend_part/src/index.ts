@@ -1,6 +1,8 @@
 import express, {Express, Request, Response} from 'express'
 import dotenv from "dotenv"
 import { DB } from './repository/postgres'
+import cors from 'cors'
+import { AuthorController } from './controllers/authorController'
 dotenv.config()
 
 export class App {
@@ -8,6 +10,8 @@ export class App {
 
     constructor() {
         this.app = express()
+        this.app.use(express.json())
+        this.app.use(cors())
         this.app.get('/health-check', (req: Request, res: Response) => {
             res.send('Server is OK')
         })
@@ -21,6 +25,7 @@ export class App {
 
     public init = async () => {
         try {
+            this.app.use('/authors', new AuthorController().getRouter())
             this.listen(parseInt(process.env.APP_PORT || '') || 8000)
             await new DB().init()
         } catch (err: unknown) {
