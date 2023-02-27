@@ -24,13 +24,15 @@ export class BookService {
     public createBook = async (book: IBookDto): Promise<Book> => {
         const newBook = await Book.create({...book})
         book.authorIds.forEach(async (authorId) => {
-            console.log('bookId', newBook.id)
-            console.log('authorId', authorId)
-
-            await BookAuthor.create({
-                bookId: newBook.id,
-                authorId
-            })
+            try {
+                await BookAuthor.create({
+                    bookId: newBook.id,
+                    authorId
+                })
+            } catch (err) {
+                console.log(err)
+            }
+           
         })
         return newBook
     }

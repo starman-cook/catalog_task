@@ -1,7 +1,7 @@
 import IBook from "./IBook"
 
 export default interface IAuthor {
-    id?: number
+    id: number
     firstName: string
     lastName: string
     books: IBook[]

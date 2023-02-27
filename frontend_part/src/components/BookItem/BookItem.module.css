@@ -1,0 +1,18 @@
+.BookItem {
+    padding: 30px;
+    border: 1px solid grey;
+    background: white;
+    width: 25%;
+    margin: 20px 0;
+    overflow: hidden;
+}
+.BookItem__title {
+    width: 100%;
+    color: grey;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.BookItem__detailsLink {
+    cursor: pointer;
+}

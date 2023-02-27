@@ -1,4 +1,3 @@
-import IBook from "../interfaces/IBook"
 import IResponse from "../interfaces/IResponse"
 import { AxiosResponse } from 'axios'
 import { instance } from "./instance"
@@ -9,7 +8,7 @@ import IBookAuthor from "../interfaces/IBookAuthor"
 class BooksApi {
     public getBooks = async (title?: string): Promise<IResponse> => {
         try {
-            const books: AxiosResponse<IResponse> = await instance.get('/books', title ? {params: {query: {title}}} : undefined)
+            const books: AxiosResponse<IResponse> = await instance.get('/books', title ? {params: {title: title}} : undefined)
             const response: IResponse = books.data
             return response
         } catch (err: unknown) {

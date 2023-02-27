@@ -52,7 +52,12 @@ export const booksSlice = createSlice({
         loadingBooks: false,
         messageBooks: null
     } as IBooksState,
-    reducers: {},
+    reducers: {
+        removeBook(state, action) {
+            const idx = state.books.findIndex(b => b.id === action.payload)
+            state.books.splice(idx, 1)
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getBooks.rejected, (state) => {
@@ -112,4 +117,4 @@ export const booksSlice = createSlice({
     }
 })
 
-export const { } = booksSlice.actions
+export const {removeBook} = booksSlice.actions

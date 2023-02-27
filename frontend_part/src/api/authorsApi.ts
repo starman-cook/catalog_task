@@ -1,7 +1,6 @@
 import IResponse from "../interfaces/IResponse"
 import { instance } from "./instance"
 import { AxiosResponse } from 'axios'
-import IAuthor from "../interfaces/IAuthor"
 import IAuthorDto from "../interfaces/IAuthorDto"
 
 
