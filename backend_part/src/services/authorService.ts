@@ -62,15 +62,25 @@ export class AuthorService {
     }
 
     public deleteAuthorWithBooks = async (id: number): Promise<number> => {
-        const amount: number = await BookAuthor.destroy({
+        
+        const allLiens = await BookAuthor.findAll({
             where: {
                 authorId: id
             }
         })
+
+        allLiens.forEach(async(el) => {
+            const amount = await BookAuthor.count({where: {bookId: el.bookId}})
+            if (amount === 1) {
+                await Book.destroy({where: {id: el.bookId}})
+            }
+            await BookAuthor.destroy({where: {authorId: el.authorId}})
+        })
+
         await Author.destroy({where: {
             id
         }})
-        return amount
+        return allLiens.length
     }
 
     public getAuthor = async (id: number): Promise<Author | null> => {
