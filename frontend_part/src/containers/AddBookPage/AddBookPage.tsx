@@ -7,7 +7,7 @@ import { createBook } from "../../store/books/booksSlice";
 import { AppDispatch, AppState } from "../../store/store";
 
 
-const AddBooksPage: FunctionComponent = (): React.ReactElement => {
+const AddBookPage: FunctionComponent = (): React.ReactElement => {
     const dispatch: AppDispatch = useDispatch()
     const {authors} = useSelector((state: AppState) => state.authors, shallowEqual)
     const [selectedAuthors, setSelectedAuthors] = useState<number[]>([])
@@ -55,8 +55,8 @@ const AddBooksPage: FunctionComponent = (): React.ReactElement => {
                     {authors?.length ? 
                         authors.map(a => {
                             return (
-                                <div>
-                                    <label key={a.id}>
+                                <div key={a.id}>
+                                    <label>
                                         <input onChange={(e) => selectAuthorHandler(e, a.id)}  type="checkbox" />
                                         <span>{a.firstName} {a.lastName}</span>
                                     </label>
@@ -70,4 +70,4 @@ const AddBooksPage: FunctionComponent = (): React.ReactElement => {
     )
 }
 
-export default AddBooksPage
+export default AddBookPage

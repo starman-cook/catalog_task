@@ -65,7 +65,8 @@ const BookItem: FunctionComponent<IBookItemProps> = (props): React.ReactElement 
 
             {addingAuthor ? 
                 <div>
-                    <select onChange={selectAuthorHandler}>
+                    <select defaultValue={'no'} onChange={selectAuthorHandler}>
+                        <option value={'no'} disabled>SELECT AUTHOR</option>
                         {authors?.length ? 
                             authors.map(a => {
                                 return <option value={a.id} key={a.id}>{a.firstName} {a.lastName}</option>

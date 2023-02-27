@@ -1,6 +1,8 @@
 import { Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout/Layout'
-import AddBooksPage from './containers/AddBookPage/AddBookPage'
+import AddAuthorPage from './containers/AddAuthorPage/AddAuthorPage'
+import AddBookPage from './containers/AddBookPage/AddBookPage'
+import AuthorsPage from './containers/AuthorsPage/AuthorsPage'
 import BooksPage from './containers/BooksPage/BooksPage'
 
 
@@ -10,7 +12,9 @@ const App = () => {
     <Layout>
         <Routes>
           <Route path='/' element={<BooksPage />} />
-          <Route path='/add-book' element={<AddBooksPage />} />
+          <Route path='/authors' element={<AuthorsPage />} />
+          <Route path='/add-book' element={<AddBookPage />} />
+          <Route path='/add-author' element={<AddAuthorPage />} />
         </Routes>
     </Layout>
   )

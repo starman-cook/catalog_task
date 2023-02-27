@@ -73,7 +73,12 @@ export const authorsSlice = createSlice({
         loadingAuthors: false,
         messageAuthors: null
     } as IAuthorsState,
-    reducers: {},
+    reducers: {
+        removeAuthor(state, action) {
+            const idx = state.authors.findIndex(a => a.id === action.payload)
+            state.authors.splice(idx, 1)
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getAuthors.rejected, (state) => {
@@ -167,4 +172,4 @@ export const authorsSlice = createSlice({
     }
 })
 
-export const { } = authorsSlice.actions
+export const { removeAuthor } = authorsSlice.actions

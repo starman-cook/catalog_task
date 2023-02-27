@@ -112,7 +112,7 @@ class AuthorsApi {
 
     public deleteAuthorWithBooks = async(id: number): Promise<IResponse> => {
         try {
-            const authors: AxiosResponse<IResponse> = await instance.get(`/authors/with-books/${id}`)
+            const authors: AxiosResponse<IResponse> = await instance.delete(`/authors/with-books/${id}`)
             const response: IResponse = authors.data
             return response
         } catch (err: unknown) {
