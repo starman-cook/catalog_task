@@ -8,11 +8,8 @@ import IAuthorDto from "../interfaces/IAuthorDto"
 class AuthorsApi {
     public getAuthors = async(): Promise<IResponse> => {
         try {
-            const authors: AxiosResponse<IAuthor[]> = await instance.get('/authors')
-            const response: IResponse = {
-                message: 'Success',
-                result: authors.data
-            }
+            const authors: AxiosResponse<IResponse> = await instance.get('/authors')
+            const response: IResponse = authors.data
             return response
         } catch (err: unknown) {
             const error = err as Error
@@ -26,11 +23,8 @@ class AuthorsApi {
 
     public getAuthorsByMin = async(min: number): Promise<IResponse> => {
         try {
-            const authors: AxiosResponse<IAuthor[]> = await instance.get(`/authors/min/${min}`)
-            const response: IResponse = {
-                message: 'Success',
-                result: authors.data
-            }
+            const authors: AxiosResponse<IResponse> = await instance.get(`/authors/min/${min}`)
+            const response: IResponse = authors.data
             return response
         } catch (err: unknown) {
             const error = err as Error
@@ -44,11 +38,8 @@ class AuthorsApi {
 
     public getAuthorsByMax = async(max: number): Promise<IResponse> => {
         try {
-            const authors: AxiosResponse<IAuthor[]> = await instance.get(`/authors/min/${max}`)
-            const response: IResponse = {
-                message: 'Success',
-                result: authors.data
-            }
+            const authors: AxiosResponse<IResponse> = await instance.get(`/authors/min/${max}`)
+            const response: IResponse = authors.data
             return response
         } catch (err: unknown) {
             const error = err as Error
@@ -62,11 +53,8 @@ class AuthorsApi {
 
     public getAuthorsByMinMax = async(min: number, max: number): Promise<IResponse> => {
         try {
-            const authors: AxiosResponse<IAuthor[]> = await instance.get(`/authors/min-max/${min}/${max}`)
-            const response: IResponse = {
-                message: 'Success',
-                result: authors.data
-            }
+            const authors: AxiosResponse<IResponse> = await instance.get(`/authors/min-max/${min}/${max}`)
+            const response: IResponse = authors.data
             return response
         } catch (err: unknown) {
             const error = err as Error
@@ -80,11 +68,8 @@ class AuthorsApi {
 
     public getAuthorById = async(id: number): Promise<IResponse> => {
         try {
-            const authors: AxiosResponse<IAuthor | null> = await instance.get(`/authors/${id}`)
-            const response: IResponse = {
-                message: 'Success',
-                result: authors.data
-            }
+            const authors: AxiosResponse<IResponse> = await instance.get(`/authors/${id}`)
+            const response: IResponse = authors.data
             return response
         } catch (err: unknown) {
             const error = err as Error
@@ -98,11 +83,8 @@ class AuthorsApi {
 
     public createAuthor = async(author: IAuthorDto): Promise<IResponse> => {
         try {
-            const authors: AxiosResponse<IAuthor> = await instance.post('/authors', author)
-            const response: IResponse = {
-                message: 'Success',
-                result: authors.data
-            }
+            const authors: AxiosResponse<IResponse> = await instance.post('/authors', author)
+            const response: IResponse = authors.data
             return response
         } catch (err: unknown) {
             const error = err as Error
@@ -116,11 +98,8 @@ class AuthorsApi {
 
     public deleteAuthor = async(id: number): Promise<IResponse> => {
         try {
-            const authors: AxiosResponse<number> = await instance.delete(`/authors/${id}`)
-            const response: IResponse = {
-                message: 'Success',
-                result: authors.data
-            }
+            const authors: AxiosResponse<IResponse> = await instance.delete(`/authors/${id}`)
+            const response: IResponse = authors.data
             return response
         } catch (err: unknown) {
             const error = err as Error
@@ -134,11 +113,8 @@ class AuthorsApi {
 
     public deleteAuthorWithBooks = async(id: number): Promise<IResponse> => {
         try {
-            const authors: AxiosResponse<number> = await instance.get(`/authors/with-books/${id}`)
-            const response: IResponse = {
-                message: 'Success',
-                result: authors.data
-            }
+            const authors: AxiosResponse<IResponse> = await instance.get(`/authors/with-books/${id}`)
+            const response: IResponse = authors.data
             return response
         } catch (err: unknown) {
             const error = err as Error

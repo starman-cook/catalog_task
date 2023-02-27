@@ -1,0 +1,27 @@
+.Layout {
+    background: linear-gradient(to bottom, lightblue, white);
+}
+.Layout__header {
+    width: 100%;
+    box-shadow: 1px 1px 6px 1px rgba(0,0,0, 0.5);
+}
+.Layout__header__inner {
+    padding: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.Layout__main {
+    max-width: 1100px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+.Layout__header__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.Layout__header__link {
+    text-decoration: none;
+    color: black;
+}

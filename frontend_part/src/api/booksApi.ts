@@ -9,11 +9,8 @@ import IBookAuthor from "../interfaces/IBookAuthor"
 class BooksApi {
     public getBooks = async (title?: string): Promise<IResponse> => {
         try {
-            const books: AxiosResponse<IBook[]> = await instance.get('/books', title ? {params: {query: {title}}} : undefined)
-            const response: IResponse = {
-                message: 'Success',
-                result: books.data
-            }
+            const books: AxiosResponse<IResponse> = await instance.get('/books', title ? {params: {query: {title}}} : undefined)
+            const response: IResponse = books.data
             return response
         } catch (err: unknown) {
             const error = err as Error
@@ -27,11 +24,8 @@ class BooksApi {
 
     public getBookById = async (id: number): Promise<IResponse> => {
         try {
-            const books: AxiosResponse<IBook> = await instance.get(`/books/${id}`)
-            const response: IResponse = {
-                message: 'Success',
-                result: books.data
-            }
+            const books: AxiosResponse<IResponse> = await instance.get(`/books/${id}`)
+            const response: IResponse = books.data
             return response
         } catch (err: unknown) {
             const error = err as Error
@@ -45,11 +39,8 @@ class BooksApi {
 
     public deleteBook = async (id: number): Promise<IResponse> => {
         try {
-            const books: AxiosResponse<number> = await instance.delete(`/books/${id}`)
-            const response: IResponse = {
-                message: 'Success',
-                result: books.data
-            }
+            const books: AxiosResponse<IResponse> = await instance.delete(`/books/${id}`)
+            const response: IResponse = books.data
             return response
         } catch (err: unknown) {
             const error = err as Error
@@ -63,11 +54,8 @@ class BooksApi {
 
     public createBook = async (book: IBookDto): Promise<IResponse> => {
         try {
-            const books: AxiosResponse<IBook> = await instance.post('/books', book)
-            const response: IResponse = {
-                message: 'Success',
-                result: books.data
-            }
+            const books: AxiosResponse<IResponse> = await instance.post('/books', book)
+            const response: IResponse = books.data
             return response
         } catch (err: unknown) {
             const error = err as Error
@@ -81,11 +69,8 @@ class BooksApi {
 
     public addAuthor = async (bookAuthor: IBookAuthor): Promise<IResponse> => {
         try {
-            const books: AxiosResponse<IBookAuthor> = await instance.post('/books/add-author', bookAuthor)
-            const response: IResponse = {
-                message: 'Success',
-                result: books.data
-            }
+            const books: AxiosResponse<IResponse> = await instance.post('/books/add-author', bookAuthor)
+            const response: IResponse = books.data
             return response
         } catch (err: unknown) {
             const error = err as Error
